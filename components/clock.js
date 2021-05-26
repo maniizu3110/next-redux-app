@@ -5,11 +5,11 @@ const formatTime = (time) => {
 }
 
 const Clock = () => {
-  const ts = useSelector((state) => state.timer.ts)
+  const lastUpdate = useSelector((state) => state.timer.lastUpdate)
   const light = useSelector((state) => state.timer.light)
   return (
     <div className={light ? 'light' : ''}>
-      {formatTime(ts)}
+      {formatTime(lastUpdate)}
       <style jsx>{`
         div {
           padding: 15px;
