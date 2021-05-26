@@ -24,7 +24,6 @@ const Clock = () => {
     //       background-color: #999;
     //     }
     //   `}</style>
-    // </div>
   )
 }
 
