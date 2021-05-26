@@ -1,43 +1,13 @@
-import { combineReducers } from 'redux'
-import * as types from './types'
+import initialState from '../store/initialState' 
 
-// COUNTER REDUCER
-const counterReducer = (state = 0, { type }) => {
-  switch (type) {
-    case types.INCREMENT:
-      return state + 1
-    case types.DECREMENT:
-      return state - 1
-    case types.RESET:
-      return 0
-    default:
-      return state
-  }
-}
-
-// INITIAL TIMER STATE
-const initialTimerState = {
-  lastUpdate: 0,
-  light: false,
-}
-
-// TIMER REDUCER
-const timerReducer = (state = initialTimerState, { type, payload }) => {
-  switch (type) {
-    case types.TICK:
+export const userReducer = (state = initialState.user,{type,payload})=>{
+  switch(type){
+    case 'SIGN_IN':
       return {
-        lastUpdate: payload.ts,
-        light: !!payload.light,
+        ...state,
+        ...payload
       }
-    default:
-      return state
+      default:
+        return state
   }
 }
-
-// COMBINED REDUCERS
-const reducers = {
-  counter: counterReducer,
-  timer: timerReducer,
-}
-
-export default combineReducers(reducers)
