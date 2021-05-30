@@ -13,42 +13,35 @@ firebase();
 const Index = () => {
   const { user, logout } = useUser();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(startClock());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(startClock());
+  // }, [dispatch]);
   if (user) {
     console.log(user);
     return (
-      // <div className={styles.container}>
-      //   <Card>
-      //     <Card.Body>
       <div>
         <p>{user.id}</p>
         <p>{user.email}</p>
         <p>{user.name}</p>
-
-            <hr />
-            <WriteToCloudFirestore />
-            <ReadDataFromCloudFirestore />
-            <hr />
-            <hr />
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <button onClick={() => logout()} style={{ width: "100px" }}>
-                Log Out
-              </button>
-              <a
-                href="https://github.com/bjcarlson42/nextjs-with-firebase"
-                target="_blank"
-                >
-                <button variant="outline-secondary" style={{ width: "100px" }}>
-                  Code
-                </button>
-              </a>
-             </div>
+        <hr />
+        <WriteToCloudFirestore />
+        <ReadDataFromCloudFirestore />
+        <hr />
+        <hr />
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <button onClick={() => logout()} style={{ width: "100px" }}>
+            Log Out
+          </button>
+          <a
+            href="https://github.com/bjcarlson42/nextjs-with-firebase"
+            target="_blank"
+          >
+            <button variant="outline-secondary" style={{ width: "100px" }}>
+              Code
+            </button>
+          </a>
+        </div>
       </div>
-      //     </Card.Body>
-      //   </Card>
-      // </div>
     );
   } else
     return (
