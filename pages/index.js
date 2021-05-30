@@ -6,6 +6,7 @@ import Examples from '../components/examples'
 //試験的にfirebaseでimportしたものたち
 import firebase from '../firebase/initFirebase'
 import WriteToCloudFirestore from '../components/cloudFireStore/write'
+import ReadDataFromCloudFirestore from '../components/cloudFireStore/read'
 
 firebase()
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
   return (
     <>
       <WriteToCloudFirestore/>
+      <ReadDataFromCloudFirestore/>
       <Examples />
       <Link href="/show-redux-state">
         <a>Click to see current Redux State</a>

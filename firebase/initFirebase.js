@@ -18,8 +18,6 @@ const clientCredentials = {
 export default function initFirebase() {
   if (!firebase.apps.length) {
     firebase.initializeApp(clientCredentials);
-    console.log(firebase.apps)
-    console.log(clientCredentials);
     console.log("Firebase was successfully init.");
   }
 }

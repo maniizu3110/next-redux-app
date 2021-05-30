@@ -4,13 +4,13 @@ import 'firebase/firestore'
 // import Button from 'react-bootstrap/Button'
 
 const ReadDataFromCloudFirestore = () => {
-    const { user } = useUser()
+    // const { user } = useUser()
     const readData = () => {
         try {
             firebase
                 .firestore()
                 .collection('myCollection')
-                .doc(user.id)
+                .doc('test')
                 .onSnapshot(function (doc) {
                     console.log(doc.data())
                 })
