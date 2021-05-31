@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/app";
 import "firebase/auth";
+import axios from 'axios';
 import { setUserCookie } from "../../firebase/userCookies";
 import { mapUserData } from "../../firebase/mapUserData.js";
 
@@ -22,14 +23,13 @@ const firebaseAuthConfig = {
   credentialHelper: "none",
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
-      //ここでuser作成
       const userData = mapUserData(user);
-        const url = "https://api.github.com/users/maniizu3110";
-        const response = await fetch(url).then((res) => res.json());
-        console.log(response);
-      console.log(user);
-      console.log(userData);
-      //TODO:cookieをどう持たせるのか要検討。フロント側から持たせてもいいが、ここの処理でサーバー側から持たせてもいい？（keyを同じに設定すれば別に変わらんけど。（セキュリティ的には別がいいのかな？））
+      const data ={"email":userData.email,"name":userData.name}
+      await axios.post("http://localhost:8080/user/create",data)
+      .catch(res=>
+        //TODO:firebaseだけ登録された場合のエラー処理
+        console.log("サーバーへのユーザー登録に失敗しました")
+      )
       setUserCookie(userData);
     },
   },
