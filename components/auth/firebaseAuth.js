@@ -18,7 +18,6 @@ const firebaseAuthConfig = {
             provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
             requireDisplayName: true,
         },
-        // add additional auth flows below
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     ],
     signInSuccessUrl: '/',
