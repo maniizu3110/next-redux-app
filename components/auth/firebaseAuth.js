@@ -1,56 +1,57 @@
+import initFirebase from "../../firebase/initFirebase";
+import { useEffect, useState } from "react";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import firebase from "firebase/app";
+import "firebase/auth";
+import { setUserCookie } from "../../firebase/userCookies";
+import { mapUserData } from "../../firebase/mapUserData.js";
 
-import initFirebase from '../../firebase/initFirebase'
-import { useEffect, useState } from 'react'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import { setUserCookie } from '../../firebase/userCookies'
-import { mapUserData } from '../../firebase/mapUserData.js'
-
-initFirebase() // initialize firebase
+initFirebase();
 
 const firebaseAuthConfig = {
-    signInFlow: 'popup',
-    // Auth providers
-    // https://github.com/firebase/firebaseui-web#configure-oauth-providers
-    signInOptions: [
-        {
-            provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            requireDisplayName: true,
-        },
-        // add additional auth flows below
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    ],
-    signInSuccessUrl: '/',
-    credentialHelper: 'none',
-    callbacks: {
-        signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
-            const userData = mapUserData(user)
-            setUserCookie(userData)
-            //この変あたりでjwt登録しておけそう？
-        },
+  signInFlow: "popup",
+
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: true,
     },
-}
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  ],
+  signInSuccessUrl: '/auth',
+  credentialHelper: "none",
+  callbacks: {
+    signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
+      //ここでuser作成
+      const userData = mapUserData(user);
+        const url = "https://api.github.com/users/maniizu3110";
+        const response = await fetch(url).then((res) => res.json());
+        console.log(response);
+      console.log(user);
+      console.log(userData);
+      //TODO:cookieをどう持たせるのか要検討。フロント側から持たせてもいいが、ここの処理でサーバー側から持たせてもいい？（keyを同じに設定すれば別に変わらんけど。（セキュリティ的には別がいいのかな？））
+      setUserCookie(userData);
+    },
+  },
+};
 
 const FirebaseAuth = () => {
-    // Do not SSR FirebaseUI, because it is not supported.
-    // https://github.com/firebase/firebaseui-web/issues/213
-    const [renderAuth, setRenderAuth] = useState(false)
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setRenderAuth(true)
-        }
-    }, [])
-    return (
-        <div>
-            {renderAuth ? (
-                <StyledFirebaseAuth
-                    uiConfig={firebaseAuthConfig}
-                    firebaseAuth={firebase.auth()}
-                />
-            ) : null}
-        </div>
-    )
-}
+  const [renderAuth, setRenderAuth] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setRenderAuth(true);
+    }
+  }, []);
+  return (
+    <div>
+      {renderAuth ? (
+        <StyledFirebaseAuth
+          uiConfig={firebaseAuthConfig}
+          firebaseAuth={firebase.auth()}
+        />
+      ) : null}
+    </div>
+  );
+};
 
-export default FirebaseAuth
+export default FirebaseAuth;

@@ -21,7 +21,6 @@ const useUser = () => {
       .auth()
       .signOut()
       .then(() => {
-        // Sign-out successful.
         router.push("/auth");
       })
       .catch((e) => {
@@ -38,6 +37,7 @@ const useUser = () => {
         const userData = mapUserData(user);
         setUserCookie(userData);
         setUser(userData);
+        //ここでuserを作成
       } else {
         removeUserCookie();
         setUser();
