@@ -7,7 +7,7 @@ import "firebase/analytics";
 import "firebase/performance";
 
 const clientCredentials = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  apiKey: "AIzaSyD_cP8YBIp8YbAvAg_0WuC6AIaQitVENE0",
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_ADMIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
