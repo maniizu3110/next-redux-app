@@ -17,7 +17,6 @@ const Index = () => {
   //   dispatch(startClock());
   // }, [dispatch]);
   if (user) {
-    console.log(user);
     return (
       <div>
         <p>{user.id}</p>
