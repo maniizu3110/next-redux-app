@@ -1,11 +1,7 @@
 export const mapUserData = (user) => {
-  const { uid, email, xa, displayName, photoUrl } = user;
+  const { email, displayName,} = user;
   return {
-    id: uid,
-    email,
-    //TODO:このtokenがサーバーで使えるか検証
-    token: xa,
+    email:email,
     name: displayName,
-    profilePic: photoUrl,
   };
 };
