@@ -8,7 +8,6 @@ const codeStyle = {
   border: '1px solid grey',
   marginBottom: 10,
 }
-
 const ShowReduxState = () => {
   const state = useSelector((state) => state)
 
