@@ -19,22 +19,11 @@ const firebaseAuthConfig = {
     },
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
-  // signInSuccessUrl: '/',
+  signInSuccessUrl: '/',
   credentialHelper: "none",
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
       //新規登録の場合の処理
-      if (user.metadata.creationTime === user.metadata.lastSignInTime) {
-        const userData = mapUserData(user);
-        await axios
-          .post("http://localhost:8080/api/v1/user", userData)
-          //cookieからjwt=>確認=>ユーザーが新い情報のユーザーであれば作成する
-          .catch((res) =>
-            alert(
-              "サーバーへのユーザー登録に失敗しました。一部機能をご利用いただけません"
-            )
-          );
-      }
       await firebase
         .auth()
         .currentUser.getIdToken(/* forceRefresh */ true)
@@ -44,6 +33,19 @@ const firebaseAuthConfig = {
         .catch(function (error) {
           alert("トークンの取得に失敗しました");
         });
+      if (user.metadata.creationTime === user.metadata.lastSignInTime) {
+        const userData = mapUserData(user);
+        await axios
+          .post("http://localhost:8080/api/v1/user", userData, {
+            withCredentials: true,
+          })
+          //cookieからjwt=>確認=>ユーザーが新い情報のユーザーであれば作成する
+          .catch((res) =>
+            alert(
+              "サーバーへのユーザー登録に失敗しました。一部機能をご利用いただけません"
+            )
+          );
+      }
     },
   },
 };
