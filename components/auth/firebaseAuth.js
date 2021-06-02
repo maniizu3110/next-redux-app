@@ -28,7 +28,6 @@ const firebaseAuthConfig = {
         .auth()
         .currentUser.getIdToken(/* forceRefresh */ true)
         .then((idToken) => {
-          console.log(idToken);
           setUserCookie(idToken);
         })
         .catch(function (error) {
@@ -36,7 +35,6 @@ const firebaseAuthConfig = {
         });
       if (user.metadata.creationTime === user.metadata.lastSignInTime) {
         const userData = mapUserData(user);
-        console.log(userData);
         await axios
           .post("http://localhost:8080/api/v1/user", userData, {
             withCredentials: true,
