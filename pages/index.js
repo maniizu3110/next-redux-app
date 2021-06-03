@@ -8,6 +8,7 @@ import firebase from "../firebase/initFirebase";
 import WriteToCloudFirestore from "../components/cloudFireStore/write";
 import ReadDataFromCloudFirestore from "../components/cloudFireStore/read";
 import { useUser } from "../firebase/useUser";
+import axios from "axios";
 
 firebase();
 const Index = () => {
@@ -30,6 +31,13 @@ const Index = () => {
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <button onClick={() => logout()} style={{ width: "100px" }}>
             Log Out
+          </button>
+          <button
+            onClick={() => axios.get("http://localhost:8080/api/v1/user").then(res=>{
+              console.log(res)
+            })}
+          >
+            test
           </button>
           <a
             href="https://github.com/bjcarlson42/nextjs-with-firebase"
