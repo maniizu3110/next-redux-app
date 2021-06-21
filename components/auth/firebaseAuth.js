@@ -19,7 +19,8 @@ const firebaseAuthConfig = {
     },
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
-  // signInSuccessUrl: '/',
+  //TODO：urlにIDを含めてそれに応じてAPI叩く
+  signInSuccessUrl: '/user',
   credentialHelper: "none",
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
