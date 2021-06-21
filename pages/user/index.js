@@ -34,18 +34,30 @@ const Index = () => {
               })
             }
           >
-            update schedule
+            register schedule
           </button>
           <button
-            onClick={() =>
-                //TODO：今は自分のcalenderしか連携していないのでidは適当。
-                //本番環境ではユーザーIDに応じたスケジュールを返すようにする
-              axios.put(`http://localhost:8080/api/v1/schedule/${3}`).then((res) => {
-                console.log(res);
+            onClick={() =>{
+
+              //TODO：今は自分のcalenderしか連携していないのでidは適当。
+              //本番環境ではユーザーIDに応じたスケジュールを返すようにする
+              let updatedData;
+              axios.get(`http://localhost:8080/api/v1/schedule/${3}`).then(res =>{
+                updatedData = res.data[1]
+                updatedData.summary = "還暦パーテー"
+                axios.put(`http://localhost:8080/api/v1/schedule/${3}`, {
+                    ...updatedData
+                }).then(res=>{
+                  console.log(res)
+                })
               })
+              // axios.put(`http://localhost:8080/api/v1/schedule/${3}`).then((res) => {
+                
+              // })
             }
+          }
           >
-            register schedule
+            update schedule
           </button>
         </div>
       </div>
