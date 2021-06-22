@@ -14,9 +14,6 @@ firebase();
 const Index = () => {
   const { user, logout } = useUser();
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(startClock());
-  // }, [dispatch]);
   if (user) {
     return (
       <div>

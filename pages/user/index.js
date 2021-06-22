@@ -1,5 +1,6 @@
 import firebase from "../../firebase/initFirebase";
 import { useUser } from "../../firebase/useUser";
+import DaySchedule from "../../components/day_schedule"
 import axios from "axios";
 
 firebase()
@@ -78,6 +79,7 @@ const Index = () => {
             delete schedule
           </button>
         </div>
+        <DaySchedule/>
       </div>
     );
   } else {
