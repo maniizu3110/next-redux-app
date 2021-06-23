@@ -55,4 +55,4 @@ const useUser = () => {
   return { user, logout };
 };
 
-export { useUser };
+export { useUser};

@@ -4,8 +4,6 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/app";
 import "firebase/auth";
 import axios from "axios";
-import { signInAction } from "../../src/user/actions";
-import { useDispatch } from "react-redux";
 import { setUserCookie } from "../../firebase/userCookies";
 import { mapUserData } from "../../firebase/mapUserData.js";
 //処理完了した時にstoreに確実に情報を登録する（トランザクション）
@@ -23,7 +21,7 @@ const firebaseAuthConfig = {
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
   //TODO：urlにIDを含めてそれに応じてAPI叩く
-  // signInSuccessUrl: '/user',
+  signInSuccessUrl: '/user',
   credentialHelper: "none",
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
@@ -48,7 +46,6 @@ const firebaseAuthConfig = {
       //新規登録の場合の処理
       if (user.metadata.creationTime === user.metadata.lastSignInTime) {
         const userData = mapUserData(user);
-        console.log(userData);
         await axios
           .post("http://localhost:8080/api/v1/user", userData, {
             withCredentials: true,
