@@ -2,6 +2,8 @@ import firebase from "../../firebase/initFirebase";
 import { useUser } from "../../firebase/useUser";
 import DaySchedule from "../../components/day_schedule"
 import axios from "axios";
+//そもそも承認されていなければ入れないページ
+//もしstore内に情報を持っていなければ、firebaseの情報を使って情報を取得しに行く
 
 firebase()
 const Index = () => {
