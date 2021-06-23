@@ -6,6 +6,7 @@ import thunkMiddleware from "redux-thunk";
 import { userReducer } from "../user/reducers";
 
 //storeで管理するものが増えたらreducerをここに追加
+//ページ遷移で状態が消えていて大問題なので修正
 const allReducers = {
   user: userReducer,
 };

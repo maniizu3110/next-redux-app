@@ -63,7 +63,7 @@
   "resolved" "https://registry.npmjs.org/@devexpress/dx-core/-/dx-core-2.7.5.tgz"
   "version" "2.7.5"
 
-"@devexpress/dx-react-core@2.7.5":
+"@devexpress/dx-react-core@^2.7.5", "@devexpress/dx-react-core@2.7.5":
   "integrity" "sha512-YwJ4l8nnMs/vghqamo8OzirDnrbT1ZNIcMP5xJFJJQIyfYAXvGGDS4yLeYI4cwitBg/d2O4jMOReXDB8tUaDDQ=="
   "resolved" "https://registry.npmjs.org/@devexpress/dx-react-core/-/dx-react-core-2.7.5.tgz"
   "version" "2.7.5"
@@ -81,7 +81,7 @@
     "clsx" "^1.0.4"
     "prop-types" "^15.7.2"
 
-"@devexpress/dx-react-scheduler@2.7.5":
+"@devexpress/dx-react-scheduler@^2.7.5", "@devexpress/dx-react-scheduler@2.7.5":
   "integrity" "sha512-PGvGxvvaGRTUtzliXeXSGbOWlg+4siRc4LsQ0eGpC18pUlsA+GJGMVi/6X7dLAxNnO3pnfSvrUF8kmC+9wG5KA=="
   "resolved" "https://registry.npmjs.org/@devexpress/dx-react-scheduler/-/dx-react-scheduler-2.7.5.tgz"
   "version" "2.7.5"
