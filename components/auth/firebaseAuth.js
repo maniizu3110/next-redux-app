@@ -33,7 +33,7 @@ const firebaseAuthConfig = {
         //emailとnameを使ってapiサーバと認証サーバの整合性をとる
         const userData = mapUserData(user);
         await axios.get("http://localhost:8080/api/v1/user/login",{
-         params:{ "name":`${userData.name}`,"email":`${userData.email}`}
+        params:{ "name":`${userData.name}`,"email":`${userData.email}`}
         }).then(res=>{
           const user = res.data;
           // dispatch(signInAction({id:user.ID,name:user.name,email:user.email}))

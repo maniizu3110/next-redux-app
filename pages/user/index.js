@@ -13,7 +13,6 @@ const Index = () => {
   const { user, logout } = useUser();
   //TODO:render時に複数回if分の中が走っているので改善（3回回っている）
   if(!storeUser.id && user){
-    console.log("無限ループ")
     axios
     .get("http://localhost:8080/api/v1/user/login", {
       params: { "name": `${user.name}`, "email": `${user.email}` },
@@ -28,7 +27,6 @@ const Index = () => {
         name: data.name,
         email: data.email,
       }))
-      router.push("/")
     });
   }
 
