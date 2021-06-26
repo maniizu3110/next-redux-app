@@ -5,8 +5,9 @@ export const userReducer = (state = initialState.user,{type,payload})=>{
     case 'SIGN_IN':
       return {
         ...state,
-        ...payload
-      }
+        //スプレッド構文により被ってる場所だけ上書きしてくれる
+        ...payload,
+      };
       default:
         return state
   }

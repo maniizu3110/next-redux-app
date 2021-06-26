@@ -6,6 +6,7 @@ import "firebase/auth";
 import axios from "axios";
 import { setUserCookie } from "../../firebase/userCookies";
 import { mapUserData } from "../../firebase/mapUserData.js";
+//処理完了した時にstoreに確実に情報を登録する（トランザクション）
 
 initFirebase();
 
@@ -24,22 +25,33 @@ const firebaseAuthConfig = {
   credentialHelper: "none",
   callbacks: {
     signInSuccessWithAuthResult: async ({ user }, redirectUrl) => {
-      //新規登録の場合の処理
       await firebase
-        .auth()
-        .currentUser.getIdToken(/* forceRefresh */ true)
-        .then((idToken) => {
-          setUserCookie(idToken);
+      .auth()
+      .currentUser.getIdToken(/* forceRefresh */ true)
+      .then(async (idToken) => {
+        setUserCookie(idToken);
+        //emailとnameを使ってapiサーバと認証サーバの整合性をとる
+        const userData = mapUserData(user);
+        await axios.get("http://localhost:8080/api/v1/user/login",{
+         params:{ "name":`${userData.name}`,"email":`${userData.email}`}
+        }).then(res=>{
+          const user = res.data;
+          // dispatch(signInAction({id:user.ID,name:user.name,email:user.email}))
+
         })
-        .catch(function (error) {
-          alert("トークンの取得に失敗しました");
-        });
+      })
+      .catch(function (error) {
+        alert("トークンの取得に失敗しました");
+      });
+      //新規登録の場合の処理
       if (user.metadata.creationTime === user.metadata.lastSignInTime) {
         const userData = mapUserData(user);
         await axios
           .post("http://localhost:8080/api/v1/user", userData, {
             withCredentials: true,
-          })
+          }).then(
+
+          )
           //cookieからjwt=>確認=>ユーザーが新い情報のユーザーであれば作成する
           .catch((res) =>
             alert(
