@@ -19,7 +19,7 @@ const Index = () => {
           style={{ width: "100px" }}
           onClick={() => dispatch("/redux_test")}
         >
-          テストページへ移動
+          テストページへ移動a
         </button>
         <hr />
         <div style={{ display: "flex", justifyContent: "space-around" }}>
