@@ -14,6 +14,13 @@ const Index = () => {
         <p>{user.id}</p>
         <p>{user.email}</p>
         <p>{user.name}</p>
+        <button
+          variant="outline-secondary"
+          style={{ width: "100px" }}
+          onClick={() => dispatch("/redux_test")}
+        >
+          テストページへ移動
+        </button>
         <hr />
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <button onClick={() => logout()} style={{ width: "100px" }}>
@@ -23,8 +30,12 @@ const Index = () => {
             href="https://github.com/bjcarlson42/nextjs-with-firebase"
             target="_blank"
           >
-            <button variant="outline-secondary" style={{ width: "100px" }}>
-              Code
+            <button
+              variant="outline-secondary"
+              style={{ width: "100px" }}
+              onClick={() => dispatch("/redux_test")}
+            >
+              テストページへ移動
             </button>
           </a>
         </div>
